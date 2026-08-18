@@ -56,7 +56,7 @@
 </head>
 <body>
 <main class="wrap">
-  <p class="eyebrow">Personal notification service</p>
+  <p class="eyebrow">Automated SMS alert service</p>
   <h1>BTC Streak Alerts</h1>
   <div class="streak" aria-hidden="true">
     <i class="g" style="height:11px"></i><i class="g" style="height:16px"></i>
@@ -64,14 +64,24 @@
     <i class="r" style="height:19px"></i><i class="r" style="height:9px"></i>
   </div>
 
-  <p>BTC Streak Alerts is a private notification service operated by John Finn
-  as a sole proprietor. It watches the price of Bitcoin and sends a text message
-  when BTC-USD closes three consecutive 15-minute candles in the same direction
-  &mdash; three rising or three falling.</p>
+  <p>BTC Streak Alerts is an automated notification service operated by
+  John Finn, a sole proprietorship. A software application monitors public
+  cryptocurrency exchange data and sends an SMS alert when BTC-USD closes three consecutive 15-minute
+  candles in the same direction &mdash; three rising or three falling.</p>
 
-  <p>The service has a single recipient: its operator. Messages are sent only to
-  the one mobile number stored in the operator's own configuration. No one else
-  can subscribe, and no numbers are collected from anyone.</p>
+  <p>Alerts are sent only to subscribers who have opted in by texting the
+  keyword below. No phone numbers are collected from any other source.</p>
+
+  <h2>How to subscribe</h2>
+  <p>Text the keyword <strong>START</strong> to
+  <strong>NA</strong> &mdash; the same number the alerts come
+  from. You will receive a confirmation reply immediately:</p>
+  <div class="sample">John Finn BTC Alerts: You are now subscribed to BTC price alerts.
+Msg frequency varies, up to [N] msgs/day. Msg &amp; data rates may apply.
+Reply HELP for help, STOP to cancel.</div>
+  <p>Texting the keyword is the only way to subscribe. No one is enrolled by
+  default, and no phone numbers are obtained from any other source, purchased
+  list, or third party.</p>
 
   <h2>What a message looks like</h2>
   <div class="sample">John Finn BTC Alerts: BTC-USD up 3 GREEN 15m candles
@@ -82,7 +92,7 @@ close $116,950 | streak -0.74% | last -0.19%
 Reply STOP to end.</div>
 
   <h2>Frequency and cost</h2>
-  <p>Message frequency varies with market activity. You may receive up to 20
+  <p>Message frequency varies with market activity. You may receive up to [N]
   messages per day. Message and data rates may apply.</p>
 
   <h2>Stopping messages</h2>
