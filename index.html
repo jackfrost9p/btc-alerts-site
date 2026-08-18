@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BTC Streak Alerts</title>
+<meta name="description" content="A personal SMS notification service for Bitcoin 15-minute candle streaks.">
+<style>
+  :root{
+    --paper:#fbfbf9; --ink:#16181d; --muted:#5c6068;
+    --rule:#dcdcd5; --green:#2e7d5b; --red:#b03a32;
+    --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:var(--serif); font-size:18px; line-height:1.62;
+    -webkit-text-size-adjust:100%;
+  }
+  .wrap{max-width:40rem; margin:0 auto; padding:3.5rem 1.5rem 5rem}
+  .eyebrow{
+    font-family:var(--mono); font-size:.7rem; letter-spacing:.18em;
+    text-transform:uppercase; color:var(--muted); margin:0 0 .6rem;
+  }
+  h1{
+    font-family:var(--mono); font-weight:600; font-size:1.65rem;
+    letter-spacing:-.02em; line-height:1.2; margin:0 0 1.25rem;
+  }
+  h2{
+    font-family:var(--mono); font-weight:600; font-size:.95rem;
+    letter-spacing:.01em; margin:2.5rem 0 .6rem;
+  }
+  p{margin:0 0 1.05rem}
+  a{color:var(--ink); text-decoration:underline; text-underline-offset:3px}
+  a:focus-visible{outline:2px solid var(--green); outline-offset:3px}
+  /* signature: a streak of candle ticks, three green then three red */
+  .streak{display:flex; gap:5px; align-items:flex-end; height:26px; margin:0 0 2rem}
+  .streak i{display:block; width:7px; border-radius:1px}
+  .g{background:var(--green)} .r{background:var(--red)}
+  .sample{
+    font-family:var(--mono); font-size:.8rem; line-height:1.55;
+    background:#fff; border:1px solid var(--rule); border-left:3px solid var(--green);
+    padding:.9rem 1rem; margin:0 0 1.05rem; white-space:pre-wrap; overflow-wrap:anywhere;
+  }
+  .sample.down{border-left-color:var(--red)}
+  ul{padding-left:1.1rem; margin:0 0 1.05rem}
+  li{margin:.3rem 0}
+  footer{
+    margin-top:3.5rem; padding-top:1.25rem; border-top:1px solid var(--rule);
+    font-family:var(--mono); font-size:.78rem; color:var(--muted);
+  }
+  footer a{color:var(--muted)}
+  @media (max-width:480px){ body{font-size:17px} .wrap{padding:2.5rem 1.2rem 4rem} }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <p class="eyebrow">Personal notification service</p>
+  <h1>BTC Streak Alerts</h1>
+  <div class="streak" aria-hidden="true">
+    <i class="g" style="height:11px"></i><i class="g" style="height:16px"></i>
+    <i class="g" style="height:22px"></i><i class="r" style="height:14px"></i>
+    <i class="r" style="height:19px"></i><i class="r" style="height:9px"></i>
+  </div>
+
+  <p>BTC Streak Alerts is a private notification service operated by [YOUR NAME]
+  as a sole proprietor. It watches the price of Bitcoin and sends a text message
+  when BTC-USD closes three consecutive 15-minute candles in the same direction
+  &mdash; three rising or three falling.</p>
+
+  <p>The service has a single recipient: its operator. Messages are sent only to
+  the one mobile number stored in the operator's own configuration. No one else
+  can subscribe, and no numbers are collected from anyone.</p>
+
+  <h2>What a message looks like</h2>
+  <div class="sample">[YOUR NAME] BTC Alerts: BTC-USD up 3 GREEN 15m candles
+close $118,400 | streak +0.62% | last +0.21%
+Reply STOP to end.</div>
+  <div class="sample down">[YOUR NAME] BTC Alerts: BTC-USD down 3 RED 15m candles
+close $116,950 | streak -0.74% | last -0.19%
+Reply STOP to end.</div>
+
+  <h2>Frequency and cost</h2>
+  <p>Message frequency varies with market activity. You may receive up to 20
+  messages per day. Message and data rates may apply.</p>
+
+  <h2>Stopping messages</h2>
+  <ul>
+    <li>Reply <strong>STOP</strong> to any message to end all messages.</li>
+    <li>Reply <strong>HELP</strong> for help, or email
+      <a href="mailto:[YOUR EMAIL]">[YOUR EMAIL]</a>.</li>
+  </ul>
+
+  <h2>Not financial advice</h2>
+  <p>These alerts report that a price pattern occurred. They are not a
+  recommendation to buy or sell anything, and the pattern has not been shown to
+  predict future prices.</p>
+
+  <footer>
+    <a href="privacy.html">Privacy policy</a> &nbsp;&middot;&nbsp;
+    <a href="terms.html">Terms and conditions</a><br>
+    Operated by [YOUR NAME] &middot; [YOUR EMAIL]
+  </footer>
+</main>
+</body>
+</html>
