@@ -1,44 +1,62 @@
-# Compliance pages for A2P 10DLC
+# btc-alerts-site
 
-Three static pages. No build step, no dependencies, no JavaScript.
+Three static pages describing **BTC Streak Alerts**, a private tool that watches
+BTC-USD 15-minute candles and pushes a notification on a three-candle streak.
 
-## Before you publish
+No build step, no dependencies, no JavaScript.
 
-Search and replace across all three files:
-
-| Placeholder | Replace with |
+| File | What it is |
 |---|---|
-| `[YOUR NAME]` | Your legal name — must match the `brand_name` on your Brand registration |
-| `[YOUR EMAIL]` | A real, monitored address (same one used on the Brand) |
-| `[CITY, STATE]` | e.g. `Dallas, Texas` |
-| `[DATE]` | Today's date, e.g. `August 18, 2026` |
+| `index.html` | What the tool does, how it works, sample alerts |
+| `privacy.html` | Privacy notice — nothing is collected from anyone |
+| `terms.html` | Disclaimers: not financial advice, no warranty, no service offered |
 
-Also change "up to 20 messages per day" if your `--backtest 30` result says
-otherwise. The stated frequency should be true.
+## Status: personal project, not a service
 
-```bash
-cd site
-sed -i '' 's/\[YOUR NAME\]/Jane Doe/g; s/\[YOUR EMAIL\]/jane@example.com/g' *.html
-```
-(drop the `''` after `-i` on Linux)
+These pages originally existed to satisfy **A2P 10DLC carrier registration** for
+an SMS version of the alerter. That version is retired. Alerts now go out over a
+push backend instead, so none of the SMS compliance machinery applies anymore:
 
-## Publish free on GitHub Pages
+- No opt-in keyword, no START/STOP/HELP flows, no phone number.
+- No message-frequency or "message and data rates may apply" disclosures.
+- No Twilio, no carrier, no subscriber list.
+- No sign-up of any kind. The tool has exactly one recipient: its author.
 
-1. Create a public repo named exactly `<your-username>.github.io`.
-2. Commit these three files to the root of the `main` branch.
-3. Settings → Pages → Source: `main` / `/ (root)`. Save.
-4. Wait a minute or two, then confirm both URLs load in a private window:
-   - `https://<your-username>.github.io/privacy.html`
-   - `https://<your-username>.github.io/terms.html`
+If the 10DLC campaign is still registered, cancel it — the pages it pointed at
+no longer describe an SMS program.
 
-The private-window check matters. Reviewers reject pages that need a login,
-sit behind an auth wall, redirect to another domain, or return an error.
+## Do not publish delivery details
 
-## What the reviewer is looking for
+The notification destination is configured entirely through the alerter's local
+`.env` and stays out of this repo and off these pages. Nothing here should ever
+carry:
 
-The privacy policy carries all four required elements: it is publicly
-accessible, it states that mobile numbers are not shared with third parties,
-it discloses message frequency, and it includes "Message and data rates may
-apply." The terms page is on the same domain and is plain HTML, not a PDF.
+- a bot token, API key, or app token
+- a chat ID, user key, topic name, channel name, or handle
+- an invite or join link of any kind
 
-Keep both pages live for as long as the campaign is registered.
+The pages describe delivery only as "a private push channel" on purpose. Keep it
+that way — anything more specific is an invitation for someone to find it.
+`.gitignore` should cover `.env`; verify before every push.
+
+## Editing
+
+Each page carries its own inline `<style>` block, and the three share the same
+CSS variables (`--paper`, `--ink`, `--rule`, `--green`, `--red`). Change a color
+in one file and change it in all three, or the set stops matching.
+
+`index.html`, `privacy.html`, and `terms.html` each cross-link to the other two
+in the footer. Renaming a file means fixing six links.
+
+Both `privacy.html` and `terms.html` show a "Last updated" date near the top.
+Bump it when the text changes.
+
+## Publishing on GitHub Pages
+
+1. Commit to the root of `main`.
+2. Settings → Pages → Source: `main` / `/ (root)`.
+3. Confirm the three URLs load in a private window.
+
+All three pages carry `<meta name="robots" content="noindex">`, since a personal
+project page has no reason to rank in search results. Remove it if you ever want
+them indexed.

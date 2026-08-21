@@ -4,7 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>BTC Streak Alerts</title>
-<meta name="description" content="A personal SMS notification service for Bitcoin 15-minute candle streaks.">
+<meta name="description" content="A private, single-user tool that watches Bitcoin 15-minute candle streaks.">
+<meta name="robots" content="noindex">
 <style>
   :root{
     --paper:#fbfbf9; --ink:#16181d; --muted:#5c6068;
@@ -44,6 +45,13 @@
     padding:.9rem 1rem; margin:0 0 1.05rem; white-space:pre-wrap; overflow-wrap:anywhere;
   }
   .sample.down{border-left-color:var(--red)}
+  .note{
+    border-left:3px solid var(--muted); background:#fff;
+    border-top:1px solid var(--rule); border-right:1px solid var(--rule);
+    border-bottom:1px solid var(--rule);
+    padding:1rem 1.1rem; margin:0 0 1.3rem;
+  }
+  .note p{margin:0}
   ul{padding-left:1.1rem; margin:0 0 1.05rem}
   li{margin:.3rem 0}
   footer{
@@ -56,7 +64,7 @@
 </head>
 <body>
 <main class="wrap">
-  <p class="eyebrow">Automated SMS alert service</p>
+  <p class="eyebrow">Personal automation project</p>
   <h1>BTC Streak Alerts</h1>
   <div class="streak" aria-hidden="true">
     <i class="g" style="height:11px"></i><i class="g" style="height:16px"></i>
@@ -64,48 +72,45 @@
     <i class="r" style="height:19px"></i><i class="r" style="height:9px"></i>
   </div>
 
-  <p>BTC Streak Alerts is an automated notification service operated by
-  John Finn, a sole proprietorship. A software application monitors public
-  cryptocurrency exchange data and sends an SMS alert when BTC-USD closes three consecutive 15-minute
-  candles in the same direction &mdash; three rising or three falling.</p>
+  <p>BTC Streak Alerts is a small program that watches public cryptocurrency
+  exchange data and fires a push notification when BTC-USD closes three
+  consecutive 15-minute candles in the same direction &mdash; three rising or
+  three falling.</p>
 
-  <p>Alerts are sent only to subscribers who have opted in by texting the
-  keyword below. No phone numbers are collected from any other source.</p>
+  <div class="note">
+    <p>This is a private tool, built and run by one person for their own use.
+    It is not a product, not a subscription, and not open to sign-ups. There is
+    no mailing list and no way to join. This page exists only to describe what
+    the software does.</p>
+  </div>
 
-  <h2>How to subscribe</h2>
-  <p>Text the keyword <strong>START</strong> to
-  <strong>NA</strong> &mdash; the same number the alerts come
-  from. You will receive a confirmation reply immediately:</p>
-  <div class="sample">John Finn BTC Alerts: You are now subscribed to BTC price alerts.
-Msg frequency varies, up to approximately 30 msgs/day. Msg &amp; data rates may apply.
-Reply HELP for help, STOP to cancel.</div>
-  <p>Texting the keyword is the only way to subscribe. No one is enrolled by
-  default, and no phone numbers are obtained from any other source, purchased
-  list, or third party.</p>
+  <h2>How it works</h2>
+  <ul>
+    <li>A scheduled job polls 15-minute BTC-USD candles from a public exchange feed.</li>
+    <li>Closed candles are compared; three closes in a row in the same direction
+      counts as a streak.</li>
+    <li>Each streak alerts once. The alert is only recorded as sent after the
+      push actually succeeds, so a failed delivery retries instead of vanishing.</li>
+    <li>Delivery goes to a single private push channel. Its destination and
+      credentials live in a local environment file &mdash; never in this
+      repository and never on this page.</li>
+  </ul>
 
-  <h2>What a message looks like</h2>
-  <div class="sample">John Finn BTC Alerts: BTC-USD up 3 GREEN 15m candles
-close $118,400 | streak +0.62% | last +0.21%
-Reply STOP to end.</div>
-  <div class="sample down">John Finn BTC Alerts: BTC-USD down 3 RED 15m candles
-close $116,950 | streak -0.74% | last -0.19%
-Reply STOP to end.</div>
+  <h2>What an alert looks like</h2>
+  <div class="sample">BTC-USD up 3 GREEN 15m candles
+close $118,400 | streak +0.62% | last +0.21%</div>
+  <div class="sample down">BTC-USD down 3 RED 15m candles
+close $116,950 | streak -0.74% | last -0.19%</div>
 
-  <h2>Frequency and cost</h2>
-  <p>Message frequency varies with market activity. You may receive approximately 30 messages
-  per day. Message and data rates may apply.</p>
+  <h2>Frequency</h2>
+  <p>Alert frequency varies with market activity. Quiet stretches produce almost
+  nothing; choppy ones can produce a few dozen alerts in a day.</p>
 
-  <h2>Stopping messages and getting help</h2>
-  <p>Reply <strong>STOP</strong> to any message to unsubscribe. You will receive
-  one confirmation and nothing after it:</p>
-  <div class="sample down">John Finn BTC Alerts: You have been unsubscribed and will receive
-no further messages. Reply START to resubscribe.</div>
-  <p>Reply <strong>HELP</strong> at any time for support:</p>
-  <div class="sample">John Finn BTC Alerts: Automated Bitcoin price alerts.
-Msg frequency varies, up to approximately 30 msgs/day. Msg &amp; data rates may apply.
-Contact jackfinnstocks@gmail.com. Reply STOP to cancel.</div>
-  <p>You can also email <a href="mailto:jackfinnstocks@gmail.com">jackfinnstocks@gmail.com</a> with any
-  question about this service.</p>
+  <h2>History</h2>
+  <p>An earlier version of this project delivered alerts over SMS. That path has
+  been retired, along with its carrier registration, opt-in keyword, and phone
+  number. Notifications now go over a push service instead, and no phone numbers
+  are involved at any point.</p>
 
   <h2>Not financial advice</h2>
   <p>These alerts report that a price pattern occurred. They are not a
@@ -113,9 +118,9 @@ Contact jackfinnstocks@gmail.com. Reply STOP to cancel.</div>
   predict future prices.</p>
 
   <footer>
-    <a href="privacy.html">Privacy policy</a> &nbsp;&middot;&nbsp;
-    <a href="terms.html">Terms and conditions</a><br>
-    Operated by John Finn &middot; jackfinnstocks@gmail.com
+    <a href="privacy.html">Privacy</a> &nbsp;&middot;&nbsp;
+    <a href="terms.html">Terms</a><br>
+    A personal project by John Finn
   </footer>
 </main>
 </body>
